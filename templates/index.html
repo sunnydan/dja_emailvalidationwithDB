@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <title>Emails</title>
+</head>
+
+<body>
+    {% if invalid %}
+        <p style="background-color: red; border: solid 1px black; color: white;">{{ invalid }}</p>
+    {% endif %}
+
+    <h2>Add an Email</h2>
+    <form action='/process' method='POST'>
+        <label for="email">Email:<input type="text" name="email" id="email"></label>
+        <input type="submit" value="Add">
+    </form>
+    <form action="/reset" method="POST"><input type="submit" value="Delete All Emails"></form>
+    <h1>Email Database</h1>
+    <hr> 
+    {% for email in emails: %}
+    <p>ID: {{ email['id'] }}</p>
+    <p>Email: {{ email['email'] }}</p>
+    <p>Created At: {{ email['created_at'] }}</p>
+    <form action="/remove_email/{{ email['id'] }}" method="POST"><input type="submit" value="Delete"></form>
+    <hr> 
+    {% endfor %}
+</body>
+
+</html>
